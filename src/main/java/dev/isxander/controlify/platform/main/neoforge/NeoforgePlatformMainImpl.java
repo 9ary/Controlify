@@ -11,7 +11,8 @@ import dev.isxander.controlify.platform.network.ControlifyPacketCodec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.IEventBus;
+//? if neoforge {
+/*import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -20,6 +21,18 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
+*///?} else {
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.IForgeRegistry;
+//?}
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -30,14 +43,22 @@ import java.util.function.Supplier;
 public class NeoforgePlatformMainImpl implements PlatformMainUtilImpl {
     @Override
     public void registerCommandRegistrationCallback(CommandRegistrationCallbackEvent callback) {
-        NeoForge.EVENT_BUS.<RegisterCommandsEvent>addListener(e -> {
+        //? if neoforge {
+        /*NeoForge.EVENT_BUS.<RegisterCommandsEvent>addListener(e -> {
+        *///?} else {
+        MinecraftForge.EVENT_BUS.<RegisterCommandsEvent>addListener(e -> {
+        //?}
             callback.onRegister(e.getDispatcher(), e.getBuildContext(), e.getCommandSelection());
         });
     }
 
     @Override
     public void registerInitPlayConnectionEvent(PlayerJoinedEvent event) {
-        NeoForge.EVENT_BUS.<PlayerEvent.PlayerLoggedInEvent>addListener(e -> {
+        //? if neoforge {
+        /*NeoForge.EVENT_BUS.<PlayerEvent.PlayerLoggedInEvent>addListener(e -> {
+        *///?} else {
+        MinecraftForge.EVENT_BUS.<PlayerEvent.PlayerLoggedInEvent>addListener(e -> {
+        //?}
             event.onInit((ServerPlayer) e.getEntity());
         });
     }
@@ -87,11 +108,19 @@ public class NeoforgePlatformMainImpl implements PlatformMainUtilImpl {
 
     @Override
     public <T> Supplier<T> deferredRegister(Registry<T> registry, ResourceLocation id, Supplier<? extends T> registrant) {
-        return DeferredRegister.create(registry, id.getNamespace()).register(id.getPath(), registrant);
+        //? if neoforge {
+        /*return DeferredRegister.create(registry, id.getNamespace()).register(id.getPath(), registrant);
+        *///?} else {
+        return DeferredRegister.create((IForgeRegistry) registry, id.getNamespace()).register(id.getPath(), registrant);
+        //?}
     }
 
     private IEventBus getModEventBus() {
-        return ModLoadingContext.get().getActiveContainer().getEventBus();
+        //? if neoforge {
+        /*return ModLoadingContext.get().getActiveContainer().getEventBus();
+        *///?} else {
+        return FMLJavaModLoadingContext.get().getModEventBus();
+        //?}
     }
 }
 //?}

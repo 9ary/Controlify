@@ -7,8 +7,10 @@ import org.jetbrains.annotations.NotNull;
 public interface RenderLayer
     //? if >1.20.4 {
     /*extends net.minecraft.client.gui.LayeredDraw.Layer
-    *///?} elif forgelike {
-    extends net.neoforged.neoforge.client.gui.overlay.IGuiOverlay
+    *///?} elif neoforge {
+    /*extends net.neoforged.neoforge.client.gui.overlay.IGuiOverlay
+    *///?} elif forge {
+    extends net.minecraftforge.client.gui.overlay.IGuiOverlay
     //?}
 {
     void render(GuiGraphics graphics, float tickDelta);
@@ -23,5 +25,9 @@ public interface RenderLayer
     /*default void render(@NotNull net.neoforged.neoforge.client.gui.overlay.ExtendedGui gui, @NotNull GuiGraphics graphics, float partialTick, int screenWidth, int screenHeight) {
         this.render(graphics, partialTick);
     }
-    *///?}
+    *///?} elif forge {
+    default void render(@NotNull GuiGraphics graphics, float partialTick, int screenWidth, int screenHeight) {
+        this.render(graphics, partialTick);
+    }
+    //?}
 }
