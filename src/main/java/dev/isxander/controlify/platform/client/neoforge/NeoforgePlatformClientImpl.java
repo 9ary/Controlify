@@ -139,7 +139,11 @@ public class NeoforgePlatformClientImpl implements PlatformClientUtilImpl {
                     packLocation.toString(),
                     displayName,
                     true,
-                    BuiltInPackSource.fromName((path) -> new PathPackResources(path, resourcePath, true)),
+                    //? if neoforge {
+                    /*BuiltInPackSource.fromName((path) -> new PathPackResources(path, resourcePath, true)),
+                    *///?} else {
+                    (path) -> new PathPackResources(path, resourcePath, true),
+                    //?}
                     PackType.CLIENT_RESOURCES,
                     Pack.Position.BOTTOM,
                     PackSource.BUILT_IN
@@ -151,14 +155,18 @@ public class NeoforgePlatformClientImpl implements PlatformClientUtilImpl {
 
     @Override
     public void addHudLayer(ResourceLocation id, RenderLayer renderLayer) {
-        getModEventBus().addListener(
+        //? if neoforge {
+        /*getModEventBus().addListener(
                 //? if >1.20.4 {
-                /*RegisterGuiLayersEvent.class,
-                *///?} else {
+                /^RegisterGuiLayersEvent.class,
+                ^///?} else {
                 RegisterGuiOverlaysEvent.class,
                 //?}
                 e -> e.registerAboveAll(id, renderLayer)
         );
+        *///?} else {
+        getModEventBus().addListener((RegisterGuiOverlaysEvent e) -> e.registerAboveAll(id.getPath(), renderLayer));
+        //?}
     }
 
     @Override

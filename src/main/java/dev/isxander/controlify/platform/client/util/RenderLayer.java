@@ -26,7 +26,7 @@ public interface RenderLayer
         this.render(graphics, partialTick);
     }
     *///?} elif forge {
-    default void render(@NotNull GuiGraphics graphics, float partialTick, int screenWidth, int screenHeight) {
+    default void render(@NotNull net.minecraftforge.client.gui.overlay.ForgeGui gui, @NotNull GuiGraphics graphics, float partialTick, int screenWidth, int screenHeight) {
         this.render(graphics, partialTick);
     }
     //?}
