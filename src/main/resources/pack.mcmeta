@@ -1,0 +1,6 @@
+{
+  "pack": {
+    "description": "Controlify resources",
+    "pack_format": ${pack_format}
+  }
+}
