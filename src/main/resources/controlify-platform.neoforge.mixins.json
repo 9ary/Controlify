@@ -6,6 +6,7 @@
   "injectors": {
     "defaultRequire": 1
   },
+  "plugin": "dev.isxander.controlify.DefaultMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
     "CreativeModeInventoryScreenAccessor",
