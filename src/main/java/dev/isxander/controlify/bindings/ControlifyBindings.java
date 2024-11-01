@@ -233,7 +233,7 @@ public final class ControlifyBindings {
             .allowedContexts(BindContext.IN_GAME)
             .radialCandidate(RadialIcons.getItem(Items.DEBUG_STICK)));
     //? if >=1.20.3 {
-    public static final InputBindingSupplier TOGGLE_DEBUG_MENU_NET = ControlifyBindApi.get().registerBinding(builder -> builder
+    /*public static final InputBindingSupplier TOGGLE_DEBUG_MENU_NET = ControlifyBindApi.get().registerBinding(builder -> builder
             .id("controlify", "toggle_debug_menu_net")
             .category(DEBUG_CATEGORY)
             .allowedContexts(BindContext.IN_GAME)
@@ -243,13 +243,13 @@ public final class ControlifyBindings {
             .category(DEBUG_CATEGORY)
             .allowedContexts(BindContext.IN_GAME)
             .radialCandidate(RadialIcons.getItem(Items.DEBUG_STICK)));
-    //?} else {
-    /*public static final InputBindingSupplier TOGGLE_DEBUG_MENU_CHARTS = ControlifyBindApi.get().registerBinding(builder -> builder
+    *///?} else {
+    public static final InputBindingSupplier TOGGLE_DEBUG_MENU_CHARTS = ControlifyBindApi.get().registerBinding(builder -> builder
             .id("controlify", "toggle_debug_menu_charts")
             .category(DEBUG_CATEGORY)
             .allowedContexts(BindContext.IN_GAME)
             .radialCandidate(RadialIcons.getItem(Items.DEBUG_STICK)));
-    *///?}
+    //?}
 
     public static final InputBindingSupplier GUI_PRESS = ControlifyBindApi.get().registerBinding(builder -> builder
             .id("controlify", "gui_press")

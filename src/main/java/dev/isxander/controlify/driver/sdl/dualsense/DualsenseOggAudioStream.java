@@ -13,10 +13,10 @@ import java.io.InputStream;
  */
 public class DualsenseOggAudioStream extends
         /*? if >1.20.4 {*/
-        net.minecraft.client.sounds.JOrbisAudioStream
-        /*?} else {*/
-        /*com.mojang.blaze3d.audio.OggAudioStream
-        *//*?}*/
+        /*net.minecraft.client.sounds.JOrbisAudioStream
+        *//*?} else {*/
+        com.mojang.blaze3d.audio.OggAudioStream
+        /*?}*/
 {
 
     public DualsenseOggAudioStream(InputStream inputStream) throws IOException {
@@ -42,7 +42,7 @@ public class DualsenseOggAudioStream extends
     }
 
     /*? if <=1.20.4 {*/
-    /*@Override
+    @Override
     protected void convertMono(java.nio.FloatBuffer buf, OutputConcat channels) {
         float[] bufArr = new float[buf.limit()];
         buf.rewind();
@@ -62,7 +62,7 @@ public class DualsenseOggAudioStream extends
 
         convertStereo(leftBufArr, rightBufArr, channels::put);
     }
-    *//*?}*/
+    /*?}*/
 
     @Override
     public @NotNull AudioFormat getFormat() {

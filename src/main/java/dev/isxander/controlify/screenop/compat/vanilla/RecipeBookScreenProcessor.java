@@ -15,10 +15,10 @@ import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import java.util.List;
 
 //? if >=1.21.2
-import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
+/*import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;*/
 
 public class RecipeBookScreenProcessor
-        <T extends /*? if >=1.21.2 {*/ AbstractRecipeBookScreen<?> /*?} else {*/ /*Screen & RecipeUpdateListener *//*?}*/>
+        <T extends /*? if >=1.21.2 {*/ /*AbstractRecipeBookScreen<?> *//*?} else {*/ Screen & RecipeUpdateListener /*?}*/>
         extends ScreenProcessor<T> {
     private final T screen;
 
@@ -32,10 +32,10 @@ public class RecipeBookScreenProcessor
         super.handleButtons(controller);
 
         //? if >=1.21.2 {
-        RecipeBookComponent<?> recipeBookComponent = ((RecipeBookScreenAccessor) screen).getRecipeBookComponent();
-        //?} else {
-        /*RecipeBookComponent recipeBookComponent = screen.getRecipeBookComponent();
-        *///?}
+        /*RecipeBookComponent<?> recipeBookComponent = ((RecipeBookScreenAccessor) screen).getRecipeBookComponent();
+        *///?} else {
+        RecipeBookComponent recipeBookComponent = screen.getRecipeBookComponent();
+        //?}
 
         if (!recipeBookComponent.isVisible()) return;
         RecipeBookComponentAccessor componentAccessor = (RecipeBookComponentAccessor) recipeBookComponent;
@@ -72,8 +72,8 @@ public class RecipeBookScreenProcessor
     }
 
     //? if >=1.21.2 {
-    public interface RecipeBookScreenAccessor {
+    /*public interface RecipeBookScreenAccessor {
         RecipeBookComponent<?> getRecipeBookComponent();
     }
-    //?}
+    *///?}
 }

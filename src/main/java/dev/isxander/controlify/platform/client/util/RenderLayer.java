@@ -6,18 +6,18 @@ import org.jetbrains.annotations.NotNull;
 @FunctionalInterface
 public interface RenderLayer
     //? if >1.20.4 {
-    extends net.minecraft.client.gui.LayeredDraw.Layer
-    //?} elif forgelike {
-    /*extends net.neoforged.neoforge.client.gui.overlay.IGuiOverlay
-    *///?}
+    /*extends net.minecraft.client.gui.LayeredDraw.Layer
+    *///?} elif forgelike {
+    extends net.neoforged.neoforge.client.gui.overlay.IGuiOverlay
+    //?}
 {
     void render(GuiGraphics graphics, float tickDelta);
 
     //? if >1.20.6 {
-    default void render(GuiGraphics graphics, net.minecraft.client.DeltaTracker timer) {
+    /*default void render(GuiGraphics graphics, net.minecraft.client.DeltaTracker timer) {
         this.render(graphics, timer.getGameTimeDeltaPartialTick(false));
     }
-    //?}
+    *///?}
 
     //? if <=1.20.4 && neoforge {
     /*default void render(@NotNull net.neoforged.neoforge.client.gui.overlay.ExtendedGui gui, @NotNull GuiGraphics graphics, float partialTick, int screenWidth, int screenHeight) {

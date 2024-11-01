@@ -14,23 +14,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 //? if >=1.21.2 {
-@Mixin(AbstractRecipeBookScreen.class)
-//?} else {
-/*@Mixin(value = {
+/*@Mixin(AbstractRecipeBookScreen.class)
+*///?} else {
+@Mixin(value = {
         InventoryScreen.class,
         AbstractFurnaceScreen.class,
         CraftingScreen.class
 })
-*///?}
+//?}
 public abstract class AbstractRecipeBookScreenMixin<T extends AbstractContainerMenu>
         extends AbstractContainerScreenMixin<T> {
 
     //? if >=1.21.2 {
-    @Shadow @Final private RecipeBookComponent<?> recipeBookComponent;
-    //?} else {
-    /*@Shadow(remap = false, aliases = {"getRecipeBookComponent","m_5564_","method_2659"})
+    /*@Shadow @Final private RecipeBookComponent<?> recipeBookComponent;
+    *///?} else {
+    @Shadow(remap = false, aliases = {"getRecipeBookComponent","m_5564_","method_2659"})
     public abstract RecipeBookComponent getRecipeBookComponent();
-    *///?}
+    //?}
 
     protected AbstractRecipeBookScreenMixin(Component title) {
         super(title);
@@ -41,10 +41,10 @@ public abstract class AbstractRecipeBookScreenMixin<T extends AbstractContainerM
         Set<SnapPoint> points = new HashSet<>(super.getSnapPoints());
         SnapUtils.addRecipeSnapPoints(
                 //? if >=1.21.2 {
-                recipeBookComponent,
-                //?} else {
-                /*getRecipeBookComponent(),
-                *///?}
+                /*recipeBookComponent,
+                *///?} else {
+                getRecipeBookComponent(),
+                //?}
                 points
         );
         return points;

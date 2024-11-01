@@ -86,17 +86,17 @@ public class InGameInputHandler {
 
             if (ControlifyBindings.NEXT_SLOT.on(controller).justPressed()) {
                 //? if >=1.21.2 {
-                inventory.setSelectedHotbarSlot((inventory.selected + 1) % Inventory.getSelectionSize());
-                //?} else {
-                /*minecraft.player.getInventory().swapPaint(-1);
-                *///?}
+                /*inventory.setSelectedHotbarSlot((inventory.selected + 1) % Inventory.getSelectionSize());
+                *///?} else {
+                minecraft.player.getInventory().swapPaint(-1);
+                //?}
             }
             if (ControlifyBindings.PREV_SLOT.on(controller).justPressed()) {
                 //? if >=1.21.2 {
-                inventory.setSelectedHotbarSlot((inventory.selected - 1 + Inventory.getSelectionSize()) % Inventory.getSelectionSize());
-                //?} else {
-                /*minecraft.player.getInventory().swapPaint(1);
-                *///?}
+                /*inventory.setSelectedHotbarSlot((inventory.selected - 1 + Inventory.getSelectionSize()) % Inventory.getSelectionSize());
+                *///?} else {
+                minecraft.player.getInventory().swapPaint(1);
+                //?}
             }
 
             if (!minecraft.player.isSpectator()) {
@@ -159,17 +159,17 @@ public class InGameInputHandler {
             DebugOverlayHelper.toggleFpsOverlay();
         }
         //? if >=1.20.3 {
-        if (ControlifyBindings.TOGGLE_DEBUG_MENU_NET.on(controller).justPressed()) {
+        /*if (ControlifyBindings.TOGGLE_DEBUG_MENU_NET.on(controller).justPressed()) {
             DebugOverlayHelper.toggleNetworkOverlay();
         }
         if (ControlifyBindings.TOGGLE_DEBUG_MENU_PROF.on(controller).justPressed()) {
             DebugOverlayHelper.toggleProfilerOverlay();
         }
-        //?} else {
-        /*if (ControlifyBindings.TOGGLE_DEBUG_MENU_CHARTS.on(controller).justPressed()) {
+        *///?} else {
+        if (ControlifyBindings.TOGGLE_DEBUG_MENU_CHARTS.on(controller).justPressed()) {
             DebugOverlayHelper.toggleChartsOverlay();
         }
-        *///?}
+        //?}
         if (ControlifyBindings.DEBUG_RADIAL.on(controller).justPressed()) {
             minecraft.setScreen(new RadialMenuScreen(
                     controller,
@@ -408,12 +408,12 @@ public class InGameInputHandler {
             double z = motion.z;
 
             //? if >=1.21.2 {
-            boolean jumping = player.input.keyPresses.jump();
+            /*boolean jumping = player.input.keyPresses.jump();
             boolean shiftKeyDown = player.input.keyPresses.shift();
-            //?} else {
-            /*boolean jumping = player.input.jumping;
+            *///?} else {
+            boolean jumping = player.input.jumping;
             boolean shiftKeyDown = player.input.shiftKeyDown;
-            *///?}
+            //?}
 
             if (!jumping)
                 y = Math.min(y, 0);

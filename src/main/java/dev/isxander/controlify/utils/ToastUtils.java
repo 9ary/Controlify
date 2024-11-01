@@ -12,16 +12,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 //? if >=1.21.2
-import net.minecraft.client.gui.components.toasts.ToastManager;
+/*import net.minecraft.client.gui.components.toasts.ToastManager;*/
 
 public class ToastUtils {
     public static ControlifyToast sendToast(Component title, Component message, boolean longer) {
         ControlifyToast toast = ControlifyToast.create(title, message, longer);
         //? if >=1.21.2 {
-        Minecraft.getInstance().getToastManager().addToast(toast);
-        //?} else {
-        /*Minecraft.getInstance().getToasts().addToast(toast);
-        *///?}
+        /*Minecraft.getInstance().getToastManager().addToast(toast);
+        *///?} else {
+        Minecraft.getInstance().getToasts().addToast(toast);
+        //?}
         return toast;
     }
 
@@ -31,10 +31,10 @@ public class ToastUtils {
         private ControlifyToast(Component title, List<FormattedCharSequence> description, int maxWidth, boolean longer) {
             super(
                     /*? if >=1.20.4 {*/
-                    longer ? SystemToastId.UNSECURE_SERVER_WARNING : SystemToastId.PERIODIC_NOTIFICATION,
-                    /*?} else {*/
-                    /*longer ? SystemToastIds.UNSECURE_SERVER_WARNING : SystemToastIds.PERIODIC_NOTIFICATION,
-                    *//*?}*/
+                    /*longer ? SystemToastId.UNSECURE_SERVER_WARNING : SystemToastId.PERIODIC_NOTIFICATION,
+                    *//*?} else {*/
+                    longer ? SystemToastIds.UNSECURE_SERVER_WARNING : SystemToastIds.PERIODIC_NOTIFICATION,
+                    /*?}*/
                     title,
                     description,
                     maxWidth
@@ -42,15 +42,15 @@ public class ToastUtils {
         }
 
         //? if >=1.21.2 {
-        @Override
+        /*@Override
         public void update(ToastManager toastManager, long l) {
             super.update(toastManager, l);
             if (removed) {
                 ((SystemToastAccessor) this).setWantedVisibility(Visibility.HIDE);
             }
         }
-        //?} else {
-        /*@Override
+        *///?} else {
+        @Override
         public @NotNull Visibility render(
                 @NotNull GuiGraphics graphics,
                 @NotNull net.minecraft.client.gui.components.toasts.ToastComponent manager,
@@ -61,7 +61,7 @@ public class ToastUtils {
 
             return super.render(graphics, manager, startTime);
         }
-        *///?}
+        //?}
 
         public void remove() {
             this.removed = true;

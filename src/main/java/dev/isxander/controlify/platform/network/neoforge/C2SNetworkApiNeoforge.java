@@ -1,5 +1,5 @@
 //? if forgelike {
-/*package dev.isxander.controlify.platform.network.neoforge;
+package dev.isxander.controlify.platform.network.neoforge;
 
 import dev.isxander.controlify.platform.network.C2SNetworkApi;
 import dev.isxander.controlify.platform.network.ControlifyPacketCodec;
@@ -35,4 +35,4 @@ public class C2SNetworkApiNeoforge implements C2SNetworkApi {
         return ModLoadingContext.get().getActiveContainer().getEventBus();
     }
 }
-*///?}
+//?}

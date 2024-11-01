@@ -9,13 +9,13 @@ import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.client.player.LocalPlayer;
 import org.jetbrains.annotations.Nullable;
 //? if >=1.21.2 {
-import net.minecraft.client.player.ClientInput;
+/*import net.minecraft.client.player.ClientInput;
 import net.minecraft.world.entity.player.Input;
-//?} else {
-/*import net.minecraft.client.player.Input;
-*///?}
+*///?} else {
+import net.minecraft.client.player.Input;
+//?}
 
-public class ControllerPlayerMovement extends /*? if >=1.21.2 {*/ ClientInput /*?} else {*/ /*Input *//*?}*/ {
+public class ControllerPlayerMovement extends /*? if >=1.21.2 {*/ /*ClientInput *//*?} else {*/ Input /*?}*/ {
     private final ControllerEntity controller;
     private final LocalPlayer player;
     private boolean wasFlying, wasPassenger;
@@ -32,15 +32,15 @@ public class ControllerPlayerMovement extends /*? if >=1.21.2 {*/ ClientInput /*
             this.forwardImpulse = 0;
 
             //? if >=1.21.2 {
-            this.keyPresses = Input.EMPTY;
-            //?} else {
-            /*this.up = false;
+            /*this.keyPresses = Input.EMPTY;
+            *///?} else {
+            this.up = false;
             this.down = false;
             this.left = false;
             this.right = false;
             this.jumping = false;
             this.shiftKeyDown = false;
-            *///?}
+            //?}
 
             return;
         }
@@ -58,10 +58,10 @@ public class ControllerPlayerMovement extends /*? if >=1.21.2 {*/ ClientInput /*
         }
 
         //? if >=1.21.2 {
-        boolean up, down, left, right;
+        /*boolean up, down, left, right;
         boolean shiftKeyDown = keyPresses.shift();
         boolean jumping = keyPresses.jump();
-        //?}
+        *///?}
 
         up = this.forwardImpulse > 0;
         down = this.forwardImpulse < 0;
@@ -96,10 +96,10 @@ public class ControllerPlayerMovement extends /*? if >=1.21.2 {*/ ClientInput /*
         }
 
         //? if >=1.21.2 {
-        boolean sprinting = ControlifyBindings.SPRINT.on(controller).digitalNow();
+        /*boolean sprinting = ControlifyBindings.SPRINT.on(controller).digitalNow();
 
         this.keyPresses = new Input(up, down, left, right, jumping, shiftKeyDown, sprinting);
-        //?}
+        *///?}
 
         this.wasFlying = player.getAbilities().flying;
         this.wasPassenger = player.isPassenger();

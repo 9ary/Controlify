@@ -1,5 +1,5 @@
 //? if fabric {
-package dev.isxander.controlify.platform.client.fabric;
+/*package dev.isxander.controlify.platform.client.fabric;
 
 import dev.isxander.controlify.platform.client.CreativeTabHelper;
 import dev.isxander.controlify.platform.client.PlatformClientUtilImpl;
@@ -107,8 +107,8 @@ public class FabricPlatformClientImpl implements PlatformClientUtilImpl {
         //? fapi: >=0.100.0 {
         return new FAPIApiCreativeTabHelper(creativeScreen);
         //?} else {
-        /*return new FAPIImplCreativeTabHelper(creativeScreen);
-        *///?}
+        /^return new FAPIImplCreativeTabHelper(creativeScreen);
+        ^///?}
     }
 }
-//?}
+*///?}

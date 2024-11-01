@@ -1,5 +1,5 @@
 /*? if sodium {*/
-package dev.isxander.controlify.compatibility.sodium.mixins;
+/*package dev.isxander.controlify.compatibility.sodium.mixins;
 
 import dev.isxander.controlify.compatibility.sodium.screenop.SodiumGuiScreenProcessor;
 import dev.isxander.controlify.compatibility.sodium.screenop.SodiumScreenOperations;
@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-import /*$ sodium-package >>*/ net.caffeinemc.mods.sodium .client.gui.SodiumOptionsGUI;
-import /*$ sodium-package >>*/ net.caffeinemc.mods.sodium .client.gui.options.OptionPage;
-import /*$ sodium-package >>*/ net.caffeinemc.mods.sodium .client.gui.options.control.ControlElement;
-import /*$ sodium-package >>*/ net.caffeinemc.mods.sodium .client.gui.widgets.FlatButtonWidget;
+import /^$ sodium-package >>^/ net.caffeinemc.mods.sodium .client.gui.SodiumOptionsGUI;
+import /^$ sodium-package >>^/ net.caffeinemc.mods.sodium .client.gui.options.OptionPage;
+import /^$ sodium-package >>^/ net.caffeinemc.mods.sodium .client.gui.options.control.ControlElement;
+import /^$ sodium-package >>^/ net.caffeinemc.mods.sodium .client.gui.widgets.FlatButtonWidget;
 
 @Mixin(value = SodiumOptionsGUI.class, remap = false)
 public abstract class SodiumOptionsGUIMixin extends Screen implements ScreenProcessorProvider, SodiumScreenOperations {
@@ -89,4 +89,4 @@ public abstract class SodiumOptionsGUIMixin extends Screen implements ScreenProc
         return undoButton;
     }
 }
-/*?}*/
+*//*?}*/

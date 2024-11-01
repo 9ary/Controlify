@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(SystemToast.class)
 public interface SystemToastAccessor {
     //? if >=1.21.2 {
-    @Accessor
+    /*@Accessor
     void setWantedVisibility(Toast.Visibility visibility);
-    //?}
+    *///?}
 }

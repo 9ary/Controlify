@@ -101,10 +101,10 @@ public class Deadzone2DImageRenderer implements ImageRenderer {
 
         BufferUploader.drawWithShader(
                 /*? if >1.20.6 {*/
-                buffer.buildOrThrow()
-                /*?} else {*/
-                /*buffer.end()
-                *//*?}*/
+                /*buffer.buildOrThrow()
+                *//*?} else {*/
+                buffer.end()
+                /*?}*/
         );
 
         RenderSystem.disableBlend();
@@ -142,10 +142,10 @@ public class Deadzone2DImageRenderer implements ImageRenderer {
 
         BufferUploader.drawWithShader(
                 /*? if >1.20.6 {*/
-                buffer.buildOrThrow()
-                /*?} else {*/
-                /*buffer.end()
-                 *//*?}*/
+                /*buffer.buildOrThrow()
+                *//*?} else {*/
+                buffer.end()
+                 /*?}*/
         );
 
         RenderSystem.disableBlend();

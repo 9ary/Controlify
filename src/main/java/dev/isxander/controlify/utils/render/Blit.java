@@ -12,13 +12,13 @@ import java.util.function.Consumer;
 public final class Blit {
     public static void drawSpecial(GuiGraphics graphics, Consumer<MultiBufferSource> consumer) {
         //? if >=1.21.2 {
-        graphics.drawSpecial(consumer);
-        //?} else {
-        /*// noinspection deprecation
+        /*graphics.drawSpecial(consumer);
+        *///?} else {
+        // noinspection deprecation
         graphics.drawManaged(() -> {
             consumer.accept(graphics.bufferSource());
         });
-        *///?}
+        //?}
     }
 
     public static void blitTex(
@@ -31,7 +31,7 @@ public final class Blit {
     ) {
         graphics.blit(
                 //? if >=1.21.2
-                RenderType::guiTextured,
+                /*RenderType::guiTextured,*/
                 texture,
                 x, y,
                 u, v,
@@ -50,7 +50,7 @@ public final class Blit {
     ) {
         graphics.blit(
                 //? if >=1.21.2
-                RenderType::guiTextured,
+                /*RenderType::guiTextured,*/
                 atlasLocation,
                 x, y,
                 textureX, textureY,
@@ -69,28 +69,28 @@ public final class Blit {
             int color
     ) {
         //? <1.21.2 {
-        /*float[] argb = ColorUtils.decomposeARGBFloat(color);
+        float[] argb = ColorUtils.decomposeARGBFloat(color);
         graphics.setColor(argb[1], argb[2], argb[3], argb[0]);
-        *///?}
+        //?}
 
         graphics.blit(
                 //? if >=1.21.2
-                RenderType::guiTextured,
+                /*RenderType::guiTextured,*/
                 texture,
                 x, y,
                 u, v,
                 width, height,
                 textureWidth, textureHeight
                 //? if >=1.21.2
-                ,color
+                /*,color*/
         );
 
         //? <1.21.2
-        /*graphics.setColor(1, 1, 1, 1);*/
+        graphics.setColor(1, 1, 1, 1);
     }
 
     //? if >=1.20.3 {
-    public static void blitSprite(
+    /*public static void blitSprite(
             GuiGraphics graphics,
             ResourceLocation sprite,
             int x, int y,
@@ -123,7 +123,7 @@ public final class Blit {
                 width, height
         );
     }
-    //?}
+    *///?}
 
     public static void blitSprite(
             GuiGraphics graphics,
@@ -133,61 +133,61 @@ public final class Blit {
             int color
     ) {
         //? if >=1.21.2 {
-        graphics.blitSprite(
+        /*graphics.blitSprite(
                 RenderType::guiTextured,
                 sprite,
                 x, y,
                 width, height,
                 color
         );
-        //?} else {
-        /*float[] argb = ColorUtils.decomposeARGBFloat(color);
+        *///?} else {
+        float[] argb = ColorUtils.decomposeARGBFloat(color);
         graphics.blit(
                 x, y, 0,
                 width, height,
                 sprite,
                 argb[1], argb[2], argb[3], argb[0]
         );
-        *///?}
+        //?}
     }
 
     public static void setPosShader() {
         RenderSystem.setShader(
                 //? if >=1.21.2 {
-                CoreShaders.POSITION
-                //?} else {
-                /*GameRenderer::getPositionShader
-                *///?}
+                /*CoreShaders.POSITION
+                *///?} else {
+                GameRenderer::getPositionShader
+                //?}
         );
     }
 
     public static void setPosColorShader() {
         RenderSystem.setShader(
                 //? if >=1.21.2 {
-                CoreShaders.POSITION_COLOR
-                //?} else {
-                /*GameRenderer::getPositionColorShader
-                 *///?}
+                /*CoreShaders.POSITION_COLOR
+                *///?} else {
+                GameRenderer::getPositionColorShader
+                 //?}
         );
     }
 
     public static void setPosTexShader() {
         RenderSystem.setShader(
                 //? if >=1.21.2 {
-                CoreShaders.POSITION_TEX
-                //?} else {
-                /*GameRenderer::getPositionTexShader
-                 *///?}
+                /*CoreShaders.POSITION_TEX
+                *///?} else {
+                GameRenderer::getPositionTexShader
+                 //?}
         );
     }
 
     public static void setPosTexColorShader() {
         RenderSystem.setShader(
                 //? if >=1.21.2 {
-                CoreShaders.POSITION_TEX_COLOR
-                //?} else {
-                /*GameRenderer::getPositionTexColorShader
-                 *///?}
+                /*CoreShaders.POSITION_TEX_COLOR
+                *///?} else {
+                GameRenderer::getPositionTexColorShader
+                 //?}
         );
     }
 }

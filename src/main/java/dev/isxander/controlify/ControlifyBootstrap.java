@@ -3,7 +3,7 @@ package dev.isxander.controlify;
 import dev.isxander.controlify.server.ControlifyServer;
 
 //? if fabric {
-import net.fabricmc.api.ClientModInitializer;
+/*import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
 
@@ -23,8 +23,8 @@ public class ControlifyBootstrap implements ClientModInitializer, ModInitializer
         ControlifyServer.getInstance().onInitialize();
     }
 }
-//?} elif forgelike {
-/*import dev.isxander.controlify.gui.screen.ModConfigOpenerScreen;
+*///?} elif forgelike {
+import dev.isxander.controlify.gui.screen.ModConfigOpenerScreen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
@@ -37,13 +37,13 @@ public class ControlifyBootstrap {
 
         ModLoadingContext.get().registerExtensionPoint(
                 //? if >=1.20.6 {
-                net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
+                /*net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
                 () -> (client, parent) -> new ModConfigOpenerScreen(parent)
-                //?} else {
-                /^net.neoforged.neoforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
+                *///?} else {
+                net.neoforged.neoforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
                 () -> new net.neoforged.neoforge.client.ConfigScreenHandler.ConfigScreenFactory(
                         (client, parent) -> new ModConfigOpenerScreen(parent))
-                ^///?}
+                //?}
         );
 
         if (FMLEnvironment.dist.isClient()) {
@@ -55,4 +55,4 @@ public class ControlifyBootstrap {
         }
     }
 }
-*///?}
+//?}

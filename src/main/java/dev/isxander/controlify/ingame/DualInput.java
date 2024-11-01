@@ -4,25 +4,25 @@ import net.minecraft.util.Mth;
 import org.apache.commons.lang3.Validate;
 
 //? if >=1.21.2 {
-import net.minecraft.client.player.ClientInput;
+/*import net.minecraft.client.player.ClientInput;
 import net.minecraft.world.entity.player.Input;
-//?} else {
-/*import net.minecraft.client.player.Input;
-*///?}
+*///?} else {
+import net.minecraft.client.player.Input;
+//?}
 
-public class DualInput extends /*? if >=1.21.2 {*/ ClientInput /*?} else {*/ /*Input *//*?}*/ {
+public class DualInput extends /*? if >=1.21.2 {*/ /*ClientInput *//*?} else {*/ Input /*?}*/ {
     //? if >=1.21.2 {
-    private final ClientInput input1, input2;
-    //?} else {
-    /*private final Input input1, input2;
-    *///?}
+    /*private final ClientInput input1, input2;
+    *///?} else {
+    private final Input input1, input2;
+    //?}
 
     public DualInput(
             //? if >=1.21.2 {
-            ClientInput input1, ClientInput input2
-            //?} else {
-            /*Input input1, Input input2
-            *///?}
+            /*ClientInput input1, ClientInput input2
+            *///?} else {
+            Input input1, Input input2
+            //?}
     ) {
         Validate.isTrue(!(input1 instanceof DualInput), "Cannot nest DualInputs");
         Validate.isTrue(!(input2 instanceof DualInput), "Cannot nest DualInputs");
@@ -40,7 +40,7 @@ public class DualInput extends /*? if >=1.21.2 {*/ ClientInput /*?} else {*/ /*I
         this.forwardImpulse = Mth.clamp(input1.forwardImpulse + input2.forwardImpulse, -1, 1);
 
         //? if >=1.21.2 {
-        Input input1 = this.input1.keyPresses;
+        /*Input input1 = this.input1.keyPresses;
         Input input2 = this.input2.keyPresses;
         this.keyPresses = new Input(
                 input1.forward() || input2.forward(),
@@ -51,13 +51,13 @@ public class DualInput extends /*? if >=1.21.2 {*/ ClientInput /*?} else {*/ /*I
                 input1.shift() || input2.shift(),
                 input1.sprint() || input2.sprint()
         );
-        //?} else {
-        /*this.left = input1.left || input2.left;
+        *///?} else {
+        this.left = input1.left || input2.left;
         this.right = input1.right || input2.right;
         this.up = input1.up || input2.up;
         this.down = input1.down || input2.down;
         this.jumping = input1.jumping || input2.jumping;
         this.shiftKeyDown = input1.shiftKeyDown || input2.shiftKeyDown;
-        *///?}
+        //?}
     }
 }

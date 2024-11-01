@@ -33,7 +33,7 @@ stonecutter {
         mc("1.20.4", loaders = listOf("fabric", "neoforge"))
         mc("1.20.1", loaders = listOf("fabric", "forge"))
 
-        vcsVersion = "1.21.3-fabric"
+        vcsVersion = "1.20.1-forge"
     }
 }
 

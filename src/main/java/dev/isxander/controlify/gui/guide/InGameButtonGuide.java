@@ -81,10 +81,10 @@ public class InGameButtonGuide implements IngameGuideRegistry {
 
     public void renderHud(GuiGraphics graphics, float tickDelta) {
         boolean debugOpen = /*? if >=1.20.3 {*/
-        minecraft.getDebugOverlay().showDebugScreen();
-        /*?} else {*/
-        /*minecraft.options.renderDebug;
-        *//*?}*/
+        /*minecraft.getDebugOverlay().showDebugScreen();
+        *//*?} else {*/
+        minecraft.options.renderDebug;
+        /*?}*/
         boolean hideGui = minecraft.options.hideGui;
 
         if (!controller.genericConfig().config().showIngameGuide || minecraft.screen != null || debugOpen || hideGui)
@@ -104,10 +104,10 @@ public class InGameButtonGuide implements IngameGuideRegistry {
             RenderSystem.setProjectionMatrix(
                     matrix4f,
                     //? if >=1.21.2 {
-                    com.mojang.blaze3d.ProjectionType.ORTHOGRAPHIC
-                    //?} else {
-                    /*com.mojang.blaze3d.vertex.VertexSorting.ORTHOGRAPHIC_Z
-                     *///?}
+                    /*com.mojang.blaze3d.ProjectionType.ORTHOGRAPHIC
+                    *///?} else {
+                    com.mojang.blaze3d.vertex.VertexSorting.ORTHOGRAPHIC_Z
+                     //?}
             );
         }
 
@@ -122,10 +122,10 @@ public class InGameButtonGuide implements IngameGuideRegistry {
             RenderSystem.setProjectionMatrix(
                     prevProjection,
                     //? if >=1.21.2 {
-                    com.mojang.blaze3d.ProjectionType.ORTHOGRAPHIC
-                    //?} else {
-                    /*com.mojang.blaze3d.vertex.VertexSorting.ORTHOGRAPHIC_Z
-                    *///?}
+                    /*com.mojang.blaze3d.ProjectionType.ORTHOGRAPHIC
+                    *///?} else {
+                    com.mojang.blaze3d.vertex.VertexSorting.ORTHOGRAPHIC_Z
+                    //?}
             );
         }
     }
@@ -171,12 +171,12 @@ public class InGameButtonGuide implements IngameGuideRegistry {
                 return Optional.of(Component.translatable("controlify.guide.ingame.swim_up"));
 
             boolean canGlide = //? if >=1.21.2 {
-                    ((PlayerAccessor) player).callCanGlide() && !player.onClimbable();
-            //?} else {
-                    /*!player.isPassenger() && !player.hasEffect(MobEffects.LEVITATION);
+                    /*((PlayerAccessor) player).callCanGlide() && !player.onClimbable();
+            *///?} else {
+                    !player.isPassenger() && !player.hasEffect(MobEffects.LEVITATION);
             var chestStack = player.getItemBySlot(EquipmentSlot.CHEST);
             canGlide &= chestStack.is(Items.ELYTRA) && net.minecraft.world.item.ElytraItem.isFlyEnabled(chestStack);
-            *///?}
+            //?}
 
             if (!player.onGround()
                 && !player.isFallFlying()
@@ -189,10 +189,10 @@ public class InGameButtonGuide implements IngameGuideRegistry {
             return Optional.empty();
         });
         //? if >=1.21.2 {
-        boolean shifting = player.input.keyPresses.shift();
-        //?} else {
-        /*boolean shifting = player.input.shiftKeyDown;
-        *///?}
+        /*boolean shifting = player.input.keyPresses.shift();
+        *///?} else {
+        boolean shifting = player.input.shiftKeyDown;
+        //?}
         registerGuideAction(ControlifyBindings.SNEAK.on(controller), ActionLocation.LEFT, (ctx) -> {
             var player = ctx.player();
             if (player.getVehicle() != null)
@@ -211,10 +211,10 @@ public class InGameButtonGuide implements IngameGuideRegistry {
         });
 
         //? if >=1.21.2 {
-        boolean sprinting = player.input.keyPresses.sprint();
-        //?} else {
-        /*boolean sprinting = options.keySprint.isDown();
-        *///?}
+        /*boolean sprinting = player.input.keyPresses.sprint();
+        *///?} else {
+        boolean sprinting = options.keySprint.isDown();
+        //?}
         registerGuideAction(ControlifyBindings.SPRINT.on(controller), ActionLocation.LEFT, (ctx) -> {
             var player = ctx.player();
             if (!sprinting) {
@@ -295,10 +295,10 @@ public class InGameButtonGuide implements IngameGuideRegistry {
 
     private HitResult calculateHitResult() {
         /*? if >1.20.4 {*/
-        double pickRange = minecraft.player.blockInteractionRange();
-        /*?} else {*/
-        /*double pickRange = minecraft.gameMode.getPickRange();
-        *//*?}*/
+        /*double pickRange = minecraft.player.blockInteractionRange();
+        *//*?} else {*/
+        double pickRange = minecraft.gameMode.getPickRange();
+        /*?}*/
 
         // block
         HitResult pickResult = player.pick(pickRange, 1f, false);
@@ -306,12 +306,12 @@ public class InGameButtonGuide implements IngameGuideRegistry {
         Vec3 eyePos = player.getEyePosition(1f);
 
         /*? if >1.20.4 {*/
-        pickRange = minecraft.player.entityInteractionRange();
-        /*?} else {*/
-        /*if (minecraft.gameMode.hasFarPickRange()) {
+        /*pickRange = minecraft.player.entityInteractionRange();
+        *//*?} else {*/
+        if (minecraft.gameMode.hasFarPickRange()) {
             pickRange = 6.0;
         }
-        *//*?}*/
+        /*?}*/
 
         double maxPickRange = pickResult.getLocation().distanceToSqr(eyePos);
 

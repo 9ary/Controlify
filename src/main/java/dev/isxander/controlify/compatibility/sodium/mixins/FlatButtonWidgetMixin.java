@@ -1,5 +1,5 @@
 //? if sodium {
-package dev.isxander.controlify.compatibility.sodium.mixins;
+/*package dev.isxander.controlify.compatibility.sodium.mixins;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import dev.isxander.controlify.api.bind.InputBinding;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Map;
 import java.util.Optional;
 
-import /*$ sodium-package >>*/ net.caffeinemc.mods.sodium .client.gui.widgets.FlatButtonWidget;
+import /^$ sodium-package >>^/ net.caffeinemc.mods.sodium .client.gui.widgets.FlatButtonWidget;
 
 @Mixin(FlatButtonWidget.class)
 public class FlatButtonWidgetMixin implements ButtonGuideRenderer<FlatButtonWidget> {
@@ -79,4 +79,4 @@ public class FlatButtonWidgetMixin implements ButtonGuideRenderer<FlatButtonWidg
         this.controllerMessages.clear();
     }
 }
-//?}
+*///?}

@@ -21,10 +21,10 @@ public final class ExtraRenderTypes extends RenderType {
                             .setTextureState(new TextureStateShard(
                                     atlas,
                                     //? if >=1.21.2 {
-                                    net.minecraft.util.TriState.FALSE,
-                                    //?} else {
-                                    /*false,
-                                    *///?}
+                                    /*net.minecraft.util.TriState.FALSE,
+                                    *///?} else {
+                                    false,
+                                    //?}
                                     false
                             ))
                             .setDepthTestState(LEQUAL_DEPTH_TEST)

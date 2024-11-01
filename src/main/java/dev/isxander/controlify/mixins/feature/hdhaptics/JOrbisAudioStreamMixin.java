@@ -3,7 +3,7 @@ package dev.isxander.controlify.mixins.feature.hdhaptics;
 import org.spongepowered.asm.mixin.Mixin;
 
 /*? if >1.20.4 {*/
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.isxander.controlify.driver.sdl.dualsense.DualsenseOggAudioStream;
 import it.unimi.dsi.fastutil.floats.FloatConsumer;
@@ -69,10 +69,10 @@ public class JOrbisAudioStreamMixin {
         return !(((Object) this) instanceof DualsenseOggAudioStream);
     }
 }
-/*?} else {*/
-/*@Mixin(targets = {})
+*//*?} else {*/
+@Mixin(targets = {})
 public class JOrbisAudioStreamMixin {
 
 }
-*//*?}*/
+/*?}*/
 
