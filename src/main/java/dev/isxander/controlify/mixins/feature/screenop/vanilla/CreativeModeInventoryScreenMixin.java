@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CreativeModeInventoryScreenMixin extends AbstractContainerScreenMixin implements ScreenProcessorProvider {
-    @Unique protected CreativeModeInventoryScreenProcessor screenProcessor = new CreativeModeInventoryScreenProcessor(
+    //? if !forge {
+    /*@Unique protected CreativeModeInventoryScreenProcessor screenProcessor = new CreativeModeInventoryScreenProcessor(
             (CreativeModeInventoryScreen) (Object) this,
             () -> hoveredSlot,
             this::slotClicked,
@@ -23,4 +24,5 @@ public abstract class CreativeModeInventoryScreenMixin extends AbstractContainer
     public ScreenProcessor<?> screenProcessor() {
         return screenProcessor;
     }
+    *///?}
 }
