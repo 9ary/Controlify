@@ -297,7 +297,7 @@ val offlineRemapJar by tasks.registering(RemapJarTask::class) {
 tasks.build { dependsOn(offlineRemapJar) }
 
 tasks.remapJar {
-    if (isNeoforge) {
+    if (isForgeLike) {
         atAccessWideners.add(accessWidenerName)
     }
 }

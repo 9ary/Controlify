@@ -1,4 +1,4 @@
-//? if neoforge {
+//? if forgelike {
 /*package dev.isxander.controlify.platform.network.neoforge;
 
 import dev.isxander.controlify.platform.network.C2SNetworkApi;

@@ -23,7 +23,7 @@ public class ControlifyBootstrap implements ClientModInitializer, ModInitializer
         ControlifyServer.getInstance().onInitialize();
     }
 }
-//?} elif neoforge {
+//?} elif forgelike {
 /*import dev.isxander.controlify.gui.screen.ModConfigOpenerScreen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;

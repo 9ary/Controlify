@@ -1,4 +1,4 @@
-//? if neoforge {
+//? if forgelike {
 /*package dev.isxander.controlify.platform.neoforge.mixins;
 
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;

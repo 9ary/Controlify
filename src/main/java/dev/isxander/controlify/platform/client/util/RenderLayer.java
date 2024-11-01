@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public interface RenderLayer
     //? if >1.20.4 {
     extends net.minecraft.client.gui.LayeredDraw.Layer
-    //?} elif neoforge {
+    //?} elif forgelike {
     /*extends net.neoforged.neoforge.client.gui.overlay.IGuiOverlay
     *///?}
 {

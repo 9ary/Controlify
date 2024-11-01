@@ -1,4 +1,4 @@
-//? if neoforge {
+//? if forgelike {
 /*package dev.isxander.controlify.platform.main.neoforge;
 
 import dev.isxander.controlify.api.entrypoint.ControlifyEntrypoint;
