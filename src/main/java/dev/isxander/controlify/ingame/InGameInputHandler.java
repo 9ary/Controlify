@@ -32,6 +32,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector2f;
 import org.joml.Vector2fc;
@@ -144,6 +145,13 @@ public class InGameInputHandler {
 
                 minecraft.levelRenderer.needsUpdate();
             }
+
+            controller.gyro().ifPresent(gyro -> {
+                if (ControlifyBindings.GYRO_BUTTON.on(controller).justPressed()) {
+                    Vec2 rot = minecraft.player.getRotationVector();
+                    minecraft.player.turn(0, (- rot.x) / 0.15);
+                }
+            });
         }
         if (ControlifyBindings.TOGGLE_HUD_VISIBILITY.on(controller).justPressed()) {
             minecraft.options.hideGui = !minecraft.options.hideGui;
