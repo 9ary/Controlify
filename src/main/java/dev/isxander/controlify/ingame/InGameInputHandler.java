@@ -48,6 +48,7 @@ public class InGameInputHandler {
     private boolean gyroToggledOn;
     private boolean wasAiming;
     private Animation flickAnimation;
+    private float lastAngle;
 
     private boolean shouldShowPlayerList;
 
@@ -60,6 +61,7 @@ public class InGameInputHandler {
         this.controlify = Controlify.instance();
         this.dropRepeatHelper = new HoldRepeatHelper(20, 1);
         this.gyroToggledOn = false;
+        this.lastAngle = 0;
     }
 
     public void inputTick() {
@@ -274,7 +276,7 @@ public class InGameInputHandler {
         controller.gyro().ifPresent(gyro -> handleGyroLook(gyro, lookImpulse, aiming));
 
         if (controller.gyro().map(gyro -> gyro.confObj().lookSensitivity > 0 && gyro.confObj().flickStick).orElse(false)) {
-            handleFlickStick(player);
+            handleFlickStick(lookImpulse);
         } else {
             controller.input().ifPresent(input -> handleRegularLook(input, lookImpulse, aiming, player));
         }
@@ -359,30 +361,28 @@ public class InGameInputHandler {
         } * (config.invertX ? -1 : 1);
     }
 
-    protected void handleFlickStick(LocalPlayer player) {
+    protected void handleFlickStick(Vector2f impulse) {
         float y = ControlifyBindings.LOOK_DOWN.on(controller).analogueNow()
                 - ControlifyBindings.LOOK_UP.on(controller).analogueNow();
         float x = ControlifyBindings.LOOK_RIGHT.on(controller).analogueNow()
                 - ControlifyBindings.LOOK_LEFT.on(controller).analogueNow();
 
-        float flickAngle = Mth.wrapDegrees((float) Mth.atan2(y, x) * Mth.RAD_TO_DEG + 90f);
-
-        if (!ControlifyBindings.LOOK_DOWN.on(controller).justPressed()
-                && !ControlifyBindings.LOOK_UP.on(controller).justPressed()
-                && !ControlifyBindings.LOOK_LEFT.on(controller).justPressed()
-                && !ControlifyBindings.LOOK_RIGHT.on(controller).justPressed()
-        ) {
+        if ((x * x + y * y) < 0.25) { // Magnitude < 0.5
+            this.lastAngle = 0;
             return;
         }
 
-        if (flickAnimation != null && flickAnimation.isPlaying()) {
-            flickAnimation.skipToEnd();
-        }
+        float flickAngle = Mth.wrapDegrees((float) Mth.atan2(y, x) * Mth.RAD_TO_DEG + 90f);
 
-        flickAnimation = Animation.of(8)
-                .easing(EasingFunction.EASE_OUT_EXPO)
-                .deltaConsumerD(angle -> player.turn(angle, 0), 0, flickAngle / 0.15)
-                .play();
+        float delta = flickAngle - this.lastAngle;
+        this.lastAngle = flickAngle;
+
+        if (delta > 180f) {
+            delta -= 360f;
+        } else if (delta < -180f) {
+            delta += 360f;
+        }
+        impulse.x += delta;
     }
 
     public void processPlayerLook(float deltaTime) {
