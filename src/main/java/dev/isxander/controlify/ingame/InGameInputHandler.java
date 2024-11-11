@@ -273,12 +273,16 @@ public class InGameInputHandler {
         boolean aiming = isAiming(player);
 
         Vector2f lookImpulse = new Vector2f();
-        controller.gyro().ifPresent(gyro -> handleGyroLook(gyro, lookImpulse, aiming));
+        boolean ignoreGyro = false;
 
         if (controller.gyro().map(gyro -> gyro.confObj().lookSensitivity > 0 && gyro.confObj().flickStick).orElse(false)) {
-            handleFlickStick(lookImpulse);
+            ignoreGyro |= handleFlickStick(lookImpulse);
         } else {
             controller.input().ifPresent(input -> handleRegularLook(input, lookImpulse, aiming, player));
+        }
+
+        if (!ignoreGyro) {
+            controller.gyro().ifPresent(gyro -> handleGyroLook(gyro, lookImpulse, aiming));
         }
 
         var modifier = new LookInputModifier(new Vector2f(lookImpulse), controller);
@@ -361,7 +365,7 @@ public class InGameInputHandler {
         } * (config.invertX ? -1 : 1);
     }
 
-    protected void handleFlickStick(Vector2f impulse) {
+    protected boolean handleFlickStick(Vector2f impulse) {
         float y = ControlifyBindings.LOOK_DOWN.on(controller).analogueNow()
                 - ControlifyBindings.LOOK_UP.on(controller).analogueNow();
         float x = ControlifyBindings.LOOK_RIGHT.on(controller).analogueNow()
@@ -369,7 +373,7 @@ public class InGameInputHandler {
 
         if ((x * x + y * y) < 0.25) { // Magnitude < 0.5
             this.lastAngle = 0;
-            return;
+            return false;
         }
 
         float flickAngle = Mth.wrapDegrees((float) Mth.atan2(y, x) * Mth.RAD_TO_DEG + 90f);
@@ -383,6 +387,8 @@ public class InGameInputHandler {
             delta += 360f;
         }
         impulse.x += delta;
+
+        return true;
     }
 
     public void processPlayerLook(float deltaTime) {
