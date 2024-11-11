@@ -469,7 +469,7 @@ public class ControllerConfigScreenFactory {
                         .build())
                 .binding(def.lookSensitivity, () -> config.lookSensitivity, v -> config.lookSensitivity = v)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt)
-                        .range(0f, 3f)
+                        .range(0f, 10f)
                         .step(0.1f)
                         .formatValue(percentOrOffFormatter))
                 .listener((opt, sensitivity) -> gyroOptions.forEach(o -> {
