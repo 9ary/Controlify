@@ -15,6 +15,7 @@ import dev.isxander.controlify.gui.screen.RadialMenuScreen;
 import dev.isxander.controlify.mixins.feature.steamdeck.ScreenshotAccessor;
 import dev.isxander.controlify.server.ServerPolicies;
 import dev.isxander.controlify.utils.ControllerUtils;
+import dev.isxander.controlify.utils.CUtil;
 import dev.isxander.controlify.utils.DebugOverlayHelper;
 import dev.isxander.controlify.utils.HoldRepeatHelper;
 import dev.isxander.controlify.utils.animation.api.Animation;
@@ -361,7 +362,18 @@ public class InGameInputHandler {
 
         // convert radians per second into degrees per tick
         GyroState thisInput = new GyroState(gyroInput)
-                .mul(Mth.RAD_TO_DEG)
+                .mul(Mth.RAD_TO_DEG);
+
+        // Apply tightening
+        float length = thisInput.lengthSquared();
+        //CUtil.LOGGER.info("gyro length: {}", length);
+        float threshold = 9f;
+        if (length < threshold) {
+            float factor = length / threshold;
+            thisInput = thisInput.mul(factor);
+        }
+
+        thisInput = thisInput
                 .div(20)
                 .mul(config.lookSensitivity);
 
