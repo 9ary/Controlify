@@ -14,6 +14,7 @@ import dev.isxander.controlify.controller.*;
 import dev.isxander.controlify.controller.impl.ControllerStateImpl;
 import dev.isxander.controlify.controller.input.InputComponent;
 import dev.isxander.controlify.controller.touchpad.Touchpads;
+import dev.isxander.controlify.utils.ControllerUtils;
 import dev.isxander.controlify.utils.CUtil;
 import dev.isxander.sdl3java.api.gamepad.SDL_Gamepad;
 import dev.isxander.sdl3java.api.joystick.SDL_JoystickGUID;
@@ -98,19 +99,36 @@ public class SDL3GamepadDriver extends SDLCommonDriver<SDL_Gamepad> {
         this.updateTouchpad();
     }
 
+    private Vector2f stickDeadzone(Vector2f stick) {
+        float deadzone = 0.12f;
+        float length = stick.length();
+        length = ControllerUtils.deadzone(length, deadzone);
+        return stick.normalize(length);
+    }
+
     private void updateInput() {
         ControllerStateImpl state = new ControllerStateImpl();
         // Axis values are in the range [-32768, 32767] (short)
         // https://wiki.libsdl.org/SDL3/SDL_GameControllerGetAxis
-        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_RIGHT, positiveAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFTX))));
-        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_LEFT, negativeAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFTX))));
-        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_UP, negativeAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFTY))));
-        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_DOWN, positiveAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFTY))));
+        Vector2f left_stick = new Vector2f(
+                mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFTX)),
+                mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFTY))
+        );
+        left_stick = stickDeadzone(left_stick);
+        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_RIGHT, positiveAxis(left_stick.x));
+        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_LEFT, negativeAxis(left_stick.x));
+        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_UP, negativeAxis(left_stick.y));
+        state.setAxis(GamepadInputs.LEFT_STICK_AXIS_DOWN, positiveAxis(left_stick.y));
 
-        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_RIGHT, positiveAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_RIGHTX))));
-        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_LEFT, negativeAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_RIGHTX))));
-        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_UP, negativeAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_RIGHTY))));
-        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_DOWN, positiveAxis(mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_RIGHTY))));
+        Vector2f right_stick = new Vector2f(
+                mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_RIGHTX)),
+                mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_RIGHTY))
+        );
+        right_stick = stickDeadzone(right_stick);
+        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_RIGHT, positiveAxis(right_stick.x));
+        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_LEFT, negativeAxis(right_stick.x));
+        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_UP, negativeAxis(right_stick.y));
+        state.setAxis(GamepadInputs.RIGHT_STICK_AXIS_DOWN, positiveAxis(right_stick.y));
 
         // Triggers are in the range [0, 32767] (thanks SDL!)
         state.setAxis(GamepadInputs.LEFT_TRIGGER_AXIS, mapShortToFloat(SDL_GetGamepadAxis(ptrController, SDL_GAMEPAD_AXIS_LEFT_TRIGGER)));
