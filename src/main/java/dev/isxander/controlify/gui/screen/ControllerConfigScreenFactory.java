@@ -474,7 +474,6 @@ public class ControllerConfigScreenFactory {
                         .formatValue(percentOrOffFormatter))
                 .listener((opt, sensitivity) -> gyroOptions.forEach(o -> {
                     o.setAvailable(sensitivity > 0);
-                    o.requestSetDefault();
                 }))
                 .build());
         var relativeModeOpt = Option.<Boolean>createBuilder()
