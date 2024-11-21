@@ -350,10 +350,11 @@ public class InGameInputHandler {
         } else if(config.requiresButton.equals(GyroButtonMode.TOGGLE) && (!gyroToggledOn && !aiming)) {
             gyroInput.set(0);
         } else {
+            GyroState state = new GyroState(gyro.getState()).sub(config.calibration);
             if (config.relativeGyroMode)
-                gyroInput.add(new GyroState(gyro.getState()).mul(0.1f));
+                gyroInput.add(state.mul(0.1f));
             else
-                gyroInput.set(gyro.getState());
+                gyroInput.set(state);
         }
 
         if(config.requiresButton.equals(GyroButtonMode.TOGGLE) && gyroButton.justPressed()) {
